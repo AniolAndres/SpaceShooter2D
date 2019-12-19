@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    //Movement
     private float upwardsSpeed = 0.0f;
     private float downwardsSpeed = 0.0f;
     private float leftSpeed = 0.0f;
@@ -16,7 +17,14 @@ public class PlayerScript : MonoBehaviour
 
     public float SpeedModifier = 1.0f;
 
-    public Transform basicProjectile;
+    //Projectiles
+
+    public float baseProjCooldown;
+    public float baseProjSpeed;
+    public GameObject basicProjectile;
+
+    public float GetBaseProjCD() { return baseProjCooldown; }
+    public float GetBaseProjSpeed() { return baseProjSpeed; } 
 
     // Start is called before the first frame update
     void Start()
