@@ -15,22 +15,23 @@ public class PlayerScript : MonoBehaviour
     public void MoveLeft(float v) { leftSpeed = v; }
     public void MoveRight(float v) { rightSpeed = v; }
 
+    [Header("Movement")]
+    [Space(10)]
+
     public float SpeedModifier = 1.0f;
 
     //Projectiles
+    [Header("Projectile")]
+    [Space(10)]
 
     public float baseProjCooldown;
     public float baseProjSpeed;
+    public float baseProjDamage;
     public GameObject basicProjectile;
 
     public float GetBaseProjCD() { return baseProjCooldown; }
-    public float GetBaseProjSpeed() { return baseProjSpeed; } 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float GetBaseProjSpeed() { return baseProjSpeed; }
+    public float GetBaseProjDamage() { return baseProjDamage; }
 
     // Update is called once per frame
     void Update()

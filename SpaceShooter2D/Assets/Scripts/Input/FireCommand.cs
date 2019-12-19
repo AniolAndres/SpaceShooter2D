@@ -11,7 +11,11 @@ public class FireCommand : Command
         if(cdTimer > pScript.GetBaseProjCD())
         {
             GameObject proj = Instantiate(pScript.basicProjectile, pScript.gameObject.transform.position, Quaternion.identity);
-            proj.GetComponent<BasicProjectile>().SetSpeed(pScript.GetBaseProjSpeed());
+            BasicProjectile projScript = proj.GetComponent<BasicProjectile>();
+
+            projScript.SetSpeed(pScript.GetBaseProjSpeed());
+            projScript.SetDamage(pScript.GetBaseProjDamage());
+
             cdTimer = 0.0f;
         }
         else
