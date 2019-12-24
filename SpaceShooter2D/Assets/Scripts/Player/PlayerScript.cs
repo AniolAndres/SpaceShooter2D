@@ -5,19 +5,22 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     //Resources
-
     private ResourceManager resManager;
+
+    //Combat
+    bool isShielded = false;
+    private GameObject shieldSprite;
+    int currentHP;
+    [Header("Combat stats")]
+    [Space(10)]
+
+    public int maxHP = 10;
 
     //Movement
     private float upwardsSpeed = 0.0f;
     private float downwardsSpeed = 0.0f;
     private float leftSpeed = 0.0f;
     private float rightSpeed = 0.0f;
-
-    private float topScreen = 0.0f;
-    private float bottomScreen = 0.0f;
-    private float leftScreen = 0.0f;
-    private float rightScreen = 0.0f;
 
     public void MoveForward(float v) { upwardsSpeed = v; }
     public void MoveDown(float v) { downwardsSpeed = v; }
@@ -28,29 +31,6 @@ public class PlayerScript : MonoBehaviour
     [Space(10)]
 
     public float SpeedModifier = 1.0f;
-
-    private Vector3 Rectify(Vector3 position)
-    {
-        if(position.x > rightScreen)
-        {
-            position.x = rightScreen;
-        }
-        else if(position.x < leftScreen)
-        {
-            position.x = leftScreen;
-        }
-
-        if(position.y < bottomScreen)
-        {
-            position.y = bottomScreen;
-        }
-        else if(position.y > topScreen)
-        {
-            position.y = topScreen;
-        }
-
-        return position;
-    }
 
     //Projectiles
     [Header("Projectile")]
@@ -69,15 +49,29 @@ public class PlayerScript : MonoBehaviour
     {
         resManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
 
-        float vertExtent = Camera.main.orthographicSize;
-        float horzExtent = vertExtent * Screen.width / Screen.height;
+        shieldSprite = GameObject.FindGameObjectWithTag("ShieldSprite");
+        shieldSprite.SetActive(false);
 
-        //Vector3 camPosition = Camera.main.transform.position;
+        currentHP = maxHP;
+    }
 
-        topScreen = vertExtent - resManager.topDownMargin;
-        bottomScreen = -vertExtent + resManager.topDownMargin;
-        leftScreen = -horzExtent + resManager.leftRightMargin;
-        rightScreen = horzExtent - resManager.leftRightMargin;
+    public void ShieldPlayer()
+    {
+        if(!isShielded)
+        {
+            isShielded = true;
+            //Activate shield sprites
+
+            shieldSprite.SetActive(true);
+        }
+    }
+
+    public void DamagePlayer(int amount)
+    {
+        if(isShielded)
+        {
+
+        }
     }
 
     // Update is called once per frame
@@ -87,6 +81,6 @@ public class PlayerScript : MonoBehaviour
 
         transform.position += SpeedModifier * Time.deltaTime * totalSpeed;
 
-        transform.position = Rectify(transform.position);
+        transform.position = resManager.Rectify(transform.position);
     }
 }
