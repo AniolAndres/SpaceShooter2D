@@ -4,25 +4,16 @@ using UnityEngine;
 
 public class FireCommand : Command
 {
-    private float cdTimer = 0.0f;
-
     public override void Execute(PlayerScript pScript)
     {
-        if(cdTimer > pScript.GetBaseProjCD())
+        if(pScript.IsProjReady())
         {
             GameObject proj = Instantiate(pScript.basicProjectile, pScript.gameObject.transform.position, Quaternion.identity);
             BasicProjectile projScript = proj.GetComponent<BasicProjectile>();
 
             projScript.SetSpeed(pScript.GetBaseProjSpeed());
             projScript.SetDamage(pScript.GetBaseProjDamage());
-
-            cdTimer = 0.0f;
+            pScript.SetProjReady(false);
         }
-        else
-        {
-            cdTimer += Time.deltaTime;
-        }
-
-       
     }
 }

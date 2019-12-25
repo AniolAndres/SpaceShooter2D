@@ -6,10 +6,17 @@ public class EnemyController : MonoBehaviour
 {
     //This script will have all te variables shared among enemies, like HP, damage and score points
 
-    public float hp = 5.0f;
+    public int hp = 5;
     public GameObject ExplosionPrefab;
+    public float speed = 3.0f;
+    public float shotCD = 5.0f;
+    public int damage = 1;
+    public int score = 1;
 
-    public void Damage(float amount)
+
+    private ResourceManager resManager;
+
+    public void Damage(int amount)
     {
         hp -= amount;
         if(hp <= 0.0f)
@@ -27,9 +34,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        resManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }

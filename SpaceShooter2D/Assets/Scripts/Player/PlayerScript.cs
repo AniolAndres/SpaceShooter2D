@@ -6,15 +6,25 @@ public class PlayerScript : MonoBehaviour
 {
     //Resources
     private ResourceManager resManager;
+    private GameObject mainSpriteGO;
+    private GameObject shieldSprite;
 
     //Combat
-    bool isShielded = false;
-    private GameObject shieldSprite;
-    int currentHP;
+    private bool isShielded = false;
+    private bool isInvul = false;
+    public bool IsInvul() {return isInvul;}
+
     [Header("Combat stats")]
     [Space(10)]
 
+    public int currentHP;
     public int maxHP = 10;
+    public float invulDuration = 2.0f;
+    public float blinkInterval = 0.0f;
+
+    private float blinkTimer = 0.0f;
+    private float invulTimer = 0.0f;
+    
 
     //Movement
     private float upwardsSpeed = 0.0f;
@@ -38,17 +48,23 @@ public class PlayerScript : MonoBehaviour
 
     public float baseProjCooldown;
     public float baseProjSpeed;
-    public float baseProjDamage;
+    public int baseProjDamage;
     public GameObject basicProjectile;
 
     public float GetBaseProjCD() { return baseProjCooldown; }
     public float GetBaseProjSpeed() { return baseProjSpeed; }
-    public float GetBaseProjDamage() { return baseProjDamage; }
+    public int GetBaseProjDamage() { return baseProjDamage; }
+
+    private bool projReady = true;
+    private float projCDTimer = 0.0f;
+
+    public bool IsProjReady() { return projReady; }
+    public void SetProjReady(bool r) { projReady = r; }
 
     private void Start()
     {
         resManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
-
+        mainSpriteGO = GameObject.FindGameObjectWithTag("MainSprite");
         shieldSprite = GameObject.FindGameObjectWithTag("ShieldSprite");
         shieldSprite.SetActive(false);
 
@@ -68,19 +84,82 @@ public class PlayerScript : MonoBehaviour
 
     public void DamagePlayer(int amount)
     {
-        if(isShielded)
+        if(!isInvul)
         {
+            if(isShielded)
+            {
+                isShielded = false;
+                shieldSprite.SetActive(false);
+            }
+            else
+            {
+                currentHP -= amount;
+                mainSpriteGO.SetActive(false);
+                isInvul = true;
+            }
+        }
+    }
 
+    private void UpdateInvulTimer()
+    {
+        if(invulTimer > invulDuration)
+        {
+            mainSpriteGO.SetActive(true);
+            isInvul = false;
+            invulTimer = 0.0f;
+            blinkTimer = 0.0f;
+        }
+        else
+        {
+            invulTimer += Time.deltaTime;
+            UpdateBlinking();
+        }
+    }
+
+    private void UpdateBlinking()
+    {
+        if(blinkTimer > blinkInterval)
+        {
+            bool active = mainSpriteGO.activeInHierarchy;
+            mainSpriteGO.SetActive(!active);
+            blinkTimer = 0.0f;
+        }
+        else
+        {
+            blinkTimer += Time.deltaTime;
+        }
+    }
+
+    private void UpdateProjectileCD()
+    {
+        if (projCDTimer > baseProjCooldown)
+        {
+            projCDTimer = 0.0f;
+            projReady = true;
+        }
+        else
+        {
+            projCDTimer += Time.deltaTime;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        //Movement
         Vector3 totalSpeed = new Vector3(rightSpeed-leftSpeed, upwardsSpeed - downwardsSpeed, 0);
-
         transform.position += SpeedModifier * Time.deltaTime * totalSpeed;
-
         transform.position = resManager.Rectify(transform.position);
+
+        //Combat
+        if(isInvul)
+        {
+            UpdateInvulTimer();
+        }
+
+        if(!projReady)
+        {
+            UpdateProjectileCD();
+        }
     }
 }

@@ -12,8 +12,12 @@ public class ResourceManager : MonoBehaviour
     private float leftScreen = 0.0f;
     private float rightScreen = 0.0f;
 
+    private int score = 0;
+
     private void Start()
     {
+        score = 0;
+
         float vertExtent = Camera.main.orthographicSize;
         float horzExtent = vertExtent * Screen.width / Screen.height;
 
