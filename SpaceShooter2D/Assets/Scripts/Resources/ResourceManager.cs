@@ -13,6 +13,25 @@ public class ResourceManager : MonoBehaviour
     private float rightScreen = 0.0f;
 
     private int score = 0;
+    private int enemiesInScreen = 0;
+    private int totalEnemiesPosible = 3;
+
+    public int GetScore() { return score; }
+
+    public void AddEnemy()
+    {
+        enemiesInScreen += 1;
+    }
+
+    public void EraseEnemy()
+    {
+        enemiesInScreen -= 1;
+    }
+
+    public void AddToScore(int amount)
+    {
+        score += amount;
+    }
 
     private void Start()
     {
@@ -49,4 +68,6 @@ public class ResourceManager : MonoBehaviour
 
         return position;
     }
+
+
 }

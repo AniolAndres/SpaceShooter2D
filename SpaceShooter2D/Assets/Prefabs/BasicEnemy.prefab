@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 624087819168700292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.05, y: 0.74, z: -7.9536924}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.58693, y: 0.58693, z: 0.58693}
   m_Children:
   - {fileID: 8971428831449084515}
   m_Father: {fileID: 0}
@@ -97,10 +97,10 @@ MonoBehaviour:
   hp: 5
   ExplosionPrefab: {fileID: 3972916126709728886, guid: 77fccdcafbe31f842beb1935ddac767d,
     type: 3}
-  speed: 3
+  speed: 1
   shotCD: 5
   damage: 1
-  score: 1
+  score: 123456
 --- !u!114 &2117227249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +116,10 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7573050218518972261, guid: 1c9b6f068e193914e8b3dc472657a8d9,
     type: 3}
   projectileSpeed: 5
+  consA: 0.5
+  consB: 1.5
+  consC: 1
+  appearDuration: 5
 --- !u!1 &1576135918533150508
 GameObject:
   m_ObjectHideFlags: 0

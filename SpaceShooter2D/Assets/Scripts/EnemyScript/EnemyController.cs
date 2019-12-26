@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     public float speed = 3.0f;
     public float shotCD = 5.0f;
     public int damage = 1;
-    public int score = 1;
+    public int score = 100;
 
 
     private ResourceManager resManager;
@@ -37,11 +37,18 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         resManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
+        resManager.AddEnemy();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnDestroy()
+    {
+        resManager.EraseEnemy();
+        resManager.AddToScore(score);
     }
 }
