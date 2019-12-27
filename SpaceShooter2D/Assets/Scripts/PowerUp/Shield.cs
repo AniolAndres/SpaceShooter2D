@@ -17,6 +17,10 @@ public class Shield : MonoBehaviour
 
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "KillBox")
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()

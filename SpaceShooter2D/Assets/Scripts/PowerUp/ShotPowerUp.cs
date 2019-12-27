@@ -17,6 +17,10 @@ public class ShotPowerUp : MonoBehaviour
 
             Destroy(gameObject);
         }
+        else if(collision.gameObject.tag == "KillBox")
+        {
+            Destroy(gameObject);
+        }
     }
 
 

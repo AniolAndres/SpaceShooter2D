@@ -13,6 +13,8 @@ TagManager:
   - EnemyProjectile
   - KillBox
   - CurveCenter
+  - SpawnController
+  - CombatController
   layers:
   - Default
   - TransparentFX

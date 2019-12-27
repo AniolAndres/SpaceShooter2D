@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class AttackState : EnemyState
 {
-    private float shotInterval = 0.8f;
     private float shotTimer = 0.0f;
 
     public override void UpdateState()
     {
-        if(shotTimer > shotInterval)
+        if(shotTimer > enemy.GetEC().shotCD)
         {
             enemy.SpawnProjectile();
             shotTimer = 0.0f;
@@ -28,10 +27,5 @@ public class AttackState : EnemyState
 
         enemy.gameObject.transform.position = enemy.GetCurve().FollowCurve(enemy.GetAlpha(), enemy.consA, enemy.consB,
             enemy.consC, enemy.GetCurveCenter());
-    }
-
-    public override void ChangeState()
-    {
-
     }
 }

@@ -95,14 +95,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cbfa83e63853c458b35ccf5804950a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 3
   ExplosionPrefab: {fileID: 3972916126709728886, guid: 77fccdcafbe31f842beb1935ddac767d,
     type: 3}
   speed: 1
-  shotCD: 5
+  shotCD: 1.6
+  blinkTime: 0.2
   damage: 1
-  score: 123456
+  score: 100
   shotSound: {fileID: 8300000, guid: 1b9d3a14b9421254b874418a7236f34e, type: 3}
+  shield: {fileID: 7388667609036272159, guid: a887ed5e9e10ae749be2a374c99043a6, type: 3}
+  shot: {fileID: 5026812131982494891, guid: 287ffd120d9412f4fbf37ea685771ecf, type: 3}
+  heal: {fileID: 886721845285546567, guid: 0659d7bf2a081ad4e9366edae2c32f6c, type: 3}
+  probability: 0.15
 --- !u!114 &2117227249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,9 +123,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7573050218518972261, guid: 1c9b6f068e193914e8b3dc472657a8d9,
     type: 3}
   projectileSpeed: 5
-  consA: 0.5
+  consA: 0.8
   consB: 1.5
-  consC: 1
+  consC: 1.5
   appearDuration: 5
 --- !u!82 &914275668
 AudioSource:

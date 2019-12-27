@@ -14,23 +14,11 @@ public class ResourceManager : MonoBehaviour
     private float rightScreen = 0.0f;
 
     private int score = 0;
-    private int enemiesInScreen = 0;
-    private int totalEnemiesPosible = 3;
 
     private bool playerDead = false;
 
     public int GetScore() { return score; }
     public void PlayerIsDead(bool d) { playerDead = d; }
-
-    public void AddEnemy()
-    {
-        enemiesInScreen += 1;
-    }
-
-    public void EraseEnemy()
-    {
-        enemiesInScreen -= 1;
-    }
 
     public void AddToScore(int amount)
     {

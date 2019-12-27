@@ -18,6 +18,10 @@ public class HealPowerUp : MonoBehaviour
 
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "KillBox")
+        {
+            Destroy(gameObject);
+        }
     }
 
 

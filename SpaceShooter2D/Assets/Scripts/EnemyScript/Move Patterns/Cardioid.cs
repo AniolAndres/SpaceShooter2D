@@ -7,7 +7,7 @@ public class Cardioid : Curve
     public override Vector3 FollowCurve(float alpha, float a, float b, float c, Vector3 center)
     {
         float newRadius = a + b * Mathf.Sin(alpha);
-        float newX = center.x + newRadius * Mathf.Cos(alpha);
+        float newX = c * (center.x + newRadius * Mathf.Cos(alpha));
         float newY = center.y + newRadius * Mathf.Sin(alpha);
 
         Vector3 newPosition = new Vector3(newX, newY, 0.0f);

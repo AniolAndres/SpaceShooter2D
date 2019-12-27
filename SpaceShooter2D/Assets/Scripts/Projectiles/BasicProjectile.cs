@@ -50,7 +50,7 @@ public class BasicProjectile : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.tag == "KillBox")
+        if (collision.gameObject.tag == "KillBox" || collision.gameObject.tag == "Obstacle")
         {
             Destroy(gameObject);
         }
