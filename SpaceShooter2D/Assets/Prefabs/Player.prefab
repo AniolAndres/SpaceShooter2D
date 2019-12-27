@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 919887864306994743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.09, y: -2.59, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.77764, y: 0.77764, z: 0.77764}
   m_Children:
   - {fileID: 919887865904154841}
   - {fileID: 4912920869473168952}
@@ -59,7 +59,7 @@ MonoBehaviour:
   ExplosionPrefab: {fileID: 3972916126709728886, guid: 77fccdcafbe31f842beb1935ddac767d,
     type: 3}
   SpeedModifier: 4
-  baseProjCooldown: 0.1
+  baseProjCooldown: 0.2
   baseProjSpeed: 9
   baseProjDamage: 1
   basicProjectile: {fileID: 1516211228316614138, guid: 39b75f9aa1a71544398e8e1f0a793892,

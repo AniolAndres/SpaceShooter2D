@@ -1811,6 +1811,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highLightColor: {r: 0, g: 0.735849, b: 0.082791224, a: 0.50980395}
+  newCursor: {fileID: 2800000, guid: f14d5cf5ff5a8704198d7c371d7b291e, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!212 &2078541663
 SpriteRenderer:
   m_ObjectHideFlags: 0

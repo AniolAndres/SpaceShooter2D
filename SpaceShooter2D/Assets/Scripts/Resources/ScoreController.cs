@@ -12,6 +12,9 @@ public class ScoreController : MonoBehaviour
     public SpriteRenderer units;
 
     public Sprite[] numbers;
+    public float amplitude;
+    public float resizeTime;
+    public Color newScoreColor;
 
     private ResourceManager resManager;
 
@@ -22,7 +25,19 @@ public class ScoreController : MonoBehaviour
     private int hundredsNumber;
     private int tensNumber;
     private int unitsNumber;
+    private float growTimer = 0.0f;
+    private bool scoreChanged = false;
+    private float lambda = 0.0f;
 
+    private void ChangeSpritesColor(float lambda)
+    {
+        hundredThousands.color = Color.Lerp(Color.white, newScoreColor, lambda);
+        tenThousands.color = Color.Lerp(Color.white, newScoreColor, lambda);
+        thousands.color = Color.Lerp(Color.white, newScoreColor, lambda);
+        hundreds.color = Color.Lerp(Color.white, newScoreColor, lambda);
+        tens.color = Color.Lerp(Color.white, newScoreColor, lambda);
+        units.color = Color.Lerp(Color.white, newScoreColor, lambda);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +49,7 @@ public class ScoreController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // TODO: Put everything UI related in a Canvas
         if(score != resManager.GetScore())
         {
             score = resManager.GetScore();
@@ -58,7 +74,38 @@ public class ScoreController : MonoBehaviour
             units.sprite = numbers[unitsNumber];
 
             score = resManager.GetScore();
+
+            scoreChanged = true;
+            growTimer = 0.0f;
+            lambda = 0.0f;
         }
-        
+
+        if(scoreChanged)
+        {
+            if(lambda >= 1.0f)
+            {
+                scoreChanged = false;
+            }
+            else
+            {
+                growTimer += Time.deltaTime;
+                lambda = growTimer / resizeTime;
+
+                if(lambda > 1.0f)
+                {
+                    lambda = 1.0f;
+                }
+
+                Color newColor = Color.Lerp(newScoreColor, Color.white, lambda);
+
+                float newLambda = amplitude * (-(lambda*lambda) * 4.0f + lambda * 4.0f);
+                float newScale = 1.0f + newLambda;
+
+                ChangeSpritesColor(newLambda);
+
+                Vector3 newScaleVector = new Vector3(newScale, newScale, newScale);
+                gameObject.transform.localScale = newScaleVector;
+            }
+        }     
     }
 }

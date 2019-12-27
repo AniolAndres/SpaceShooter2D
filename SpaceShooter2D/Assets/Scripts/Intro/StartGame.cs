@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class StartGame : MonoBehaviour
 {
     public Color highLightColor;
+    public Texture2D newCursor;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
 
     private Color usualColor;
     private SpriteRenderer mySprite;
@@ -29,6 +32,7 @@ public class StartGame : MonoBehaviour
     void Start()
     {
         mySprite = gameObject.GetComponent<SpriteRenderer>();
+        Cursor.SetCursor(newCursor, hotSpot, cursorMode);
         usualColor = mySprite.color;
     }
 

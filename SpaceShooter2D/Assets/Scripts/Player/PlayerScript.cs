@@ -56,6 +56,7 @@ public class PlayerScript : MonoBehaviour
     [Space(10)]
 
     public float SpeedModifier = 1.0f;
+    public Sprite[] mainSprites;
 
     //Projectiles
     [Header("Projectile")]
@@ -81,6 +82,9 @@ public class PlayerScript : MonoBehaviour
         resManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
         audioSource = gameObject.GetComponent<AudioSource>();
         mainSpriteGO = GameObject.FindGameObjectWithTag("MainSprite");
+        int randSprite = Random.Range(0, 12);
+        mainSpriteGO.GetComponent<SpriteRenderer>().sprite = mainSprites[randSprite];
+
         shieldSprite = GameObject.FindGameObjectWithTag("ShieldSprite");
         shieldSprite.SetActive(false);
 

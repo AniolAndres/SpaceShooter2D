@@ -14,12 +14,6 @@ public class BasicEnemy : MonoBehaviour
     public void SetStateTo(EnemyState next) { currentState = next; }
     public EnemyState GetAttackState() { return attack; }
 
-    //Movement
-    [Header("Polar constants")]
-    public float consA = 1.0f;
-    public float consB = 1.0f;
-    public float consC = 1.0f;
-
     private EnemyController enemyController;
     private Curve curve;
     private Vector3 curveCenter;
@@ -56,15 +50,37 @@ public class BasicEnemy : MonoBehaviour
         enemyController.PlayShotAudio();
     }
 
+    private void AssignCurve()
+    {
+        int rand = Random.Range(0, 4);
+
+        switch(rand)
+        {
+            case 0:
+                curve = new InfinitySign();
+                break;
+            case 1:
+                curve = new Rose();
+                break;
+            case 2:
+                curve = new Lemniscata();
+                break;
+            case 3:
+                curve = new Cardioid();
+                break;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         enemyController = gameObject.GetComponent<EnemyController>();
         curveCenter = GameObject.FindGameObjectWithTag("CurveCenter").transform.position;
-        curve = new Cardioid();
+
+        AssignCurve();
         alpha = Random.Range(0.0f, Mathf.PI * 2);
 
-        firstPosition = curve.FollowCurve(alpha, consA, consB, consC, curveCenter);
+        firstPosition = curve.FollowCurve(alpha, curveCenter);
         spawnPosition = gameObject.transform.position;
 
         appear = new AppearState();

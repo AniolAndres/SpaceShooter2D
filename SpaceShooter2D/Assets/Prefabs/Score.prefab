@@ -226,6 +226,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: da09c9cba4f06e14ca6d62e9991f3c43, type: 3}
   - {fileID: 21300000, guid: 3dfefdb3f09584144a5749af2e1287bb, type: 3}
   - {fileID: 21300000, guid: a4c3e8084cbc7f141bb03f6cacaa4715, type: 3}
+  amplitude: 1
+  resizeTime: 0.4
+  newScoreColor: {r: 0.9433962, g: 0.8282772, b: 0.11124954, a: 1}
 --- !u!1 &4373840507918933972
 GameObject:
   m_ObjectHideFlags: 0

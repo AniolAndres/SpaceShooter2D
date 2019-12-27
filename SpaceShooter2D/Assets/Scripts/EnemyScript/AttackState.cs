@@ -25,7 +25,6 @@ public class AttackState : EnemyState
             enemy.SetAlpha(enemy.GetAlpha() - Mathf.PI * 2);
         }
 
-        enemy.gameObject.transform.position = enemy.GetCurve().FollowCurve(enemy.GetAlpha(), enemy.consA, enemy.consB,
-            enemy.consC, enemy.GetCurveCenter());
+        enemy.gameObject.transform.position = enemy.GetCurve().FollowCurve(enemy.GetAlpha(), enemy.GetCurveCenter());
     }
 }

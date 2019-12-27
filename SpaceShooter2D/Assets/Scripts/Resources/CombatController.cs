@@ -7,6 +7,7 @@ public class CombatController : MonoBehaviour
     public int scoreThreshold;
     public float spawnInterval;
     public float obstacleInterval;
+    public int difficultyLevel = 0;
 
     private SpawnController spawnC;
     private ResourceManager resManager;
@@ -16,6 +17,7 @@ public class CombatController : MonoBehaviour
     private int score = 0;
     private float spawnTimer = 0.0f;
     private float obstacleTimer = 0.0f;
+    private bool halfEnemy = false;
 
     public void AddEnemy()
     {
@@ -42,7 +44,7 @@ public class CombatController : MonoBehaviour
 
         if(spawnTimer > spawnInterval && enemiesInScreen < totalEnemiesPosible)
         {
-            spawnC.SpawnEnemy();
+            spawnC.SpawnEnemy(difficultyLevel);
             spawnTimer = 0.0f;
         }
         else
@@ -64,8 +66,20 @@ public class CombatController : MonoBehaviour
         if(score > actualTreshold)
         {
             spawnInterval *= 0.9f;
-            ++totalEnemiesPosible;
-            scoreThreshold += scoreThreshold / 2;
+            
+            //Increments one every 2 difficulty levels
+            if(!halfEnemy)
+            {
+                halfEnemy = true;
+            }
+            else
+            {
+                ++totalEnemiesPosible;
+                halfEnemy = false;
+            }
+
+            ++difficultyLevel;
+            scoreThreshold += scoreThreshold / 5;
             actualTreshold += scoreThreshold;
         }
     }

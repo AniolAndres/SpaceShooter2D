@@ -140,13 +140,20 @@ MonoBehaviour:
   firstSpawn: {fileID: 4795237896263992025}
   secondSpawn: {fileID: 5624240180983323639}
   thirdSpawn: {fileID: 2169493068635788452}
-  enemyPrefab: {fileID: 624087819168700292, guid: 20b1efa0fb76303409c96ac66e368b59,
+  basicEnemyPrefab: {fileID: 624087819168700292, guid: 20b1efa0fb76303409c96ac66e368b59,
+    type: 3}
+  mediumEnemyPrefab: {fileID: 1929980229962572043, guid: aff95af4bfe068741af4128d950abf73,
+    type: 3}
+  eliteEnemyPrefab: {fileID: 5308113381805664843, guid: 5ffd20db9463fd342864eedb7da735c6,
     type: 3}
   deviation: 0.2
   obsSpawn: {fileID: 7534410769366114277}
   obstaclePrefab: {fileID: 4416180118899283242, guid: c4d949c104c2a534e8023bde700afaa4,
     type: 3}
   width: 2
+  starPrefab: {fileID: 5330748919087238537, guid: 3714be8312fc8a840a85c5f311704aad,
+    type: 3}
+  starInterval: 6
 --- !u!1 &7534410769366114277
 GameObject:
   m_ObjectHideFlags: 0
