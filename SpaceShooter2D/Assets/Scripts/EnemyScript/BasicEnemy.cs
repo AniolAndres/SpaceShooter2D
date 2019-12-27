@@ -52,6 +52,8 @@ public class BasicEnemy : MonoBehaviour
     {
         BasicProjectile projScript = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<BasicProjectile>();
         projScript.SetSpeed(-projectileSpeed);
+
+        enemyController.PlayShotAudio();
     }
 
     // Start is called before the first frame update

@@ -8,11 +8,14 @@ public class PlayerScript : MonoBehaviour
     private ResourceManager resManager;
     private GameObject mainSpriteGO;
     private GameObject shieldSprite;
+    private AudioSource audioSource;
 
     //Combat
     private bool isShielded = false;
     private bool isInvul = false;
+    private bool isBoosted = false;
     public bool IsInvul() {return isInvul;}
+    public bool IsBoosted() { return isBoosted; }
 
     [Header("Combat stats")]
     [Space(10)]
@@ -21,10 +24,22 @@ public class PlayerScript : MonoBehaviour
     public int maxHP = 10;
     public float invulDuration = 2.0f;
     public float blinkInterval = 0.0f;
+    public float boostDuration = 5.0f;
+    public AudioClip shotSound;
+    public AudioClip powerUpSound;
 
+    private float boostTimer = 0.0f;
     private float blinkTimer = 0.0f;
     private float invulTimer = 0.0f;
-    
+
+    //Death
+    [Header("Death")]
+    [Space(10)]
+    public float deathDuration = 5.0f;
+    public GameObject ExplosionPrefab;
+
+    private float deathTimer = 0.0f;
+    private bool activeSprites = true;
 
     //Movement
     private float upwardsSpeed = 0.0f;
@@ -64,6 +79,7 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         resManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
+        audioSource = gameObject.GetComponent<AudioSource>();
         mainSpriteGO = GameObject.FindGameObjectWithTag("MainSprite");
         shieldSprite = GameObject.FindGameObjectWithTag("ShieldSprite");
         shieldSprite.SetActive(false);
@@ -71,11 +87,39 @@ public class PlayerScript : MonoBehaviour
         currentHP = maxHP;
     }
 
+    public void PlayShotAudio()
+    {
+        audioSource.PlayOneShot(shotSound);
+    }
+
+    public void PlayPowerUpAudio()
+    {
+        audioSource.PlayOneShot(powerUpSound);
+    }
+
+    public void BoostPlayer()
+    {
+        PlayPowerUpAudio();
+
+        if(isBoosted)
+        {
+            boostTimer = 0.0f;
+        }
+        else
+        {
+            isBoosted = true;
+        }
+    }
+
     public void ShieldPlayer()
     {
-        if(!isShielded)
+
+
+        if (!isShielded)
         {
             isShielded = true;
+
+            PlayPowerUpAudio();
             //Activate shield sprites
 
             shieldSprite.SetActive(true);
@@ -96,6 +140,21 @@ public class PlayerScript : MonoBehaviour
                 currentHP -= amount;
                 mainSpriteGO.SetActive(false);
                 isInvul = true;
+            }
+        }
+    }
+
+    public void HealPlayer(int amount)
+    {
+        if(currentHP > 0)
+        {
+            PlayPowerUpAudio();
+
+            currentHP += amount;
+
+            if(currentHP > maxHP)
+            {
+                currentHP = maxHP;
             }
         }
     }
@@ -143,6 +202,40 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void UpdateDeathTimer()
+    {
+        if(deathTimer > deathDuration)
+        {
+            resManager.PlayerIsDead(true);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            deathTimer += Time.deltaTime;
+
+            if(activeSprites)
+            {
+                Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+
+                mainSpriteGO.SetActive(false);
+                activeSprites = false;
+            }
+        }
+    }
+
+    private void UpdateBoostTimer()
+    {
+        if(boostTimer > boostDuration)
+        {
+            isBoosted = false;
+            boostTimer = 0.0f;
+        }
+        else
+        {
+            boostTimer += Time.deltaTime;
+        }
+    }
+
     // Update is called once per frame
     private void Update()
     {
@@ -152,14 +245,24 @@ public class PlayerScript : MonoBehaviour
         transform.position = resManager.Rectify(transform.position);
 
         //Combat
-        if(isInvul)
+        if(isInvul && currentHP > 0)
         {
             UpdateInvulTimer();
         }
 
-        if(!projReady)
+        if(!projReady && currentHP > 0)
         {
             UpdateProjectileCD();
+        }
+
+        if(currentHP <= 0)
+        {
+            UpdateDeathTimer();
+        }
+
+        if(isBoosted)
+        {
+            UpdateBoostTimer();
         }
     }
 }

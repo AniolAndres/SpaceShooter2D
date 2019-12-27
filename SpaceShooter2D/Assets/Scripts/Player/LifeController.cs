@@ -11,12 +11,14 @@ public class LifeController : MonoBehaviour
     public GameObject fifth;
 
     private PlayerScript pScript;
+    private ResourceManager resManager;
 
     private int prevHP = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        resManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
         pScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
         prevHP = pScript.currentHP;
     }

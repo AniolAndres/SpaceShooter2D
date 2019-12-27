@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -16,7 +17,10 @@ public class ResourceManager : MonoBehaviour
     private int enemiesInScreen = 0;
     private int totalEnemiesPosible = 3;
 
+    private bool playerDead = false;
+
     public int GetScore() { return score; }
+    public void PlayerIsDead(bool d) { playerDead = d; }
 
     public void AddEnemy()
     {
@@ -69,5 +73,11 @@ public class ResourceManager : MonoBehaviour
         return position;
     }
 
-
+    private void Update()
+    {
+        if(playerDead)
+        {
+            SceneManager.LoadScene("IntroScene");
+        }
+    }
 }

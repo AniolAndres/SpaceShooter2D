@@ -12,9 +12,15 @@ public class EnemyController : MonoBehaviour
     public float shotCD = 5.0f;
     public int damage = 1;
     public int score = 100;
+    public AudioClip shotSound;
 
-
+    private AudioSource audioSource;
     private ResourceManager resManager;
+
+    public void PlayShotAudio()
+    {
+        audioSource.PlayOneShot(shotSound);
+    }
 
     public void Damage(int amount)
     {
@@ -38,13 +44,10 @@ public class EnemyController : MonoBehaviour
     {
         resManager = GameObject.FindGameObjectWithTag("ResourceManager").GetComponent<ResourceManager>();
         resManager.AddEnemy();
+
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnDestroy()
     {
