@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Command : MonoBehaviour
 {
+    //Command pattern,
+
     public virtual void Execute(PlayerScript pScript)
     {
 

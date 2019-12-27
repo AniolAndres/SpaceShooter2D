@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StarScript : MonoBehaviour
 {
+    //this class will take care of the blinking of the environemnt stars
+
     public float blinkingTime = 0.5f;
     public float amplitude = 0.5f;
     public GameObject firstStar;

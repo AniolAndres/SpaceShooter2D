@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
+    //This class controls spawns of enemies, obstacles and evironment stars
+
     [Header("Enemy Ships")]
     [Space(10)]
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireCommand : Command
 {
-    private Vector3 deviation = new Vector3(0.4f,0.0f,0.0f);
+    private Vector3 deviation = new Vector3(0.3f,0.0f,0.0f);
 
 
     public override void Execute(PlayerScript pScript)

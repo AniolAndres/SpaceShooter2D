@@ -10,6 +10,8 @@ public class ObstacleScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Will damage player and destroy enemies
+
         if (collision.gameObject.tag == "Player")
         {
             PlayerScript pScript = collision.gameObject.GetComponent<PlayerScript>();
@@ -22,8 +24,7 @@ public class ObstacleScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float yPosition = transform.position.y - speed * Time.deltaTime;
         Vector3 newPosition = new Vector3(transform.position.x, yPosition, transform.position.z);

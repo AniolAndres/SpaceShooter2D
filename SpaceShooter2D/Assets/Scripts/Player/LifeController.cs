@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LifeController : MonoBehaviour
 {
+    // TODO: Put everything UI related in a Canvas
+
     public GameObject first;
     public GameObject second;
     public GameObject third;
@@ -26,6 +28,8 @@ public class LifeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //will only be called when a change in currenthp is detected
+
         if(prevHP != pScript.currentHP)
         {
             switch(pScript.currentHP)

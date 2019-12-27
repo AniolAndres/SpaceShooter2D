@@ -38,6 +38,7 @@ public class EnemyController : MonoBehaviour
         audioSource.PlayOneShot(shotSound);
     }
 
+    //Will damage the enemy
     public void Damage(int amount)
     {
         hp -= amount;
@@ -53,6 +54,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    //Upon death thhis function will be called to (maybe) spawn a powerup
     private void SpawnPowerUp()
     {
         float rand = Random.Range(0.0f, 1.0f);
@@ -81,7 +83,7 @@ public class EnemyController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            //If both ships collide they bot take damage
+            //If both ships collide they both take damage
             Damage(1);
             collision.gameObject.GetComponent<PlayerScript>().DamagePlayer(1);
         }

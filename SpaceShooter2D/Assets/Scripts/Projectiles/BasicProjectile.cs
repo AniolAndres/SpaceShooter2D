@@ -22,7 +22,7 @@ public class BasicProjectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         transform.position += speed * direction * Time.deltaTime;
     }

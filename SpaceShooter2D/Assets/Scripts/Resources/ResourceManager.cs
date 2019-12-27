@@ -38,6 +38,7 @@ public class ResourceManager : MonoBehaviour
         rightScreen = horzExtent - leftRightMargin;
     }
 
+    //At the beginning the plan was to have enemies usee this function also, but once polar curves were implemented tis was only needed by the player
     public Vector3 Rectify(Vector3 position)
     {
         if (position.x > rightScreen)

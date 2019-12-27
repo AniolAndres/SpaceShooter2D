@@ -101,6 +101,7 @@ public class PlayerScript : MonoBehaviour
         audioSource.PlayOneShot(powerUpSound);
     }
 
+    //Shoot twice instead of once
     public void BoostPlayer()
     {
         PlayPowerUpAudio();
@@ -115,10 +116,9 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Shield player ignoring next instance of damage
     public void ShieldPlayer()
     {
-
-
         if (!isShielded)
         {
             isShielded = true;
@@ -130,6 +130,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Dammage the player
     public void DamagePlayer(int amount)
     {
         if(!isInvul)
@@ -148,6 +149,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Heal the player
     public void HealPlayer(int amount)
     {
         if(currentHP > 0)
@@ -163,6 +165,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //When hit player will have a brief invulnerability
     private void UpdateInvulTimer()
     {
         if(invulTimer > invulDuration)
@@ -179,6 +182,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Will handle the sprite blink
     private void UpdateBlinking()
     {
         if(blinkTimer > blinkInterval)
@@ -193,6 +197,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Will handle if the projectile is ready
     private void UpdateProjectileCD()
     {
         if (projCDTimer > baseProjCooldown)
@@ -206,6 +211,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Will tell the resMAnager that player died and it's ready to change scene back
     private void UpdateDeathTimer()
     {
         if(deathTimer > deathDuration)
@@ -227,6 +233,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Will update the boost status of the player
     private void UpdateBoostTimer()
     {
         if(boostTimer > boostDuration)
