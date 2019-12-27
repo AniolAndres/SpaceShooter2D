@@ -29,9 +29,11 @@ public class ResourceManager : MonoBehaviour
     {
         score = 0;
 
+        Cursor.visible = false;
+
         float vertExtent = Camera.main.orthographicSize;
         float horzExtent = vertExtent * Screen.width / Screen.height;
-
+        
         topScreen = vertExtent - topDownMargin;
         bottomScreen = -vertExtent + topDownMargin;
         leftScreen = -horzExtent + leftRightMargin;
